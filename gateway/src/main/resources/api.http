@@ -1,0 +1,39 @@
+# Hello
+GET http://localhost:8080/service-a/hello
+
+###
+
+# Login
+GET http://localhost:8080/uaa/login
+
+###
+
+# Login as user
+POST http://localhost:8080/uaa/login
+Content-Type: application/x-www-form-urlencoded
+
+username=user&password=password
+
+###
+
+# Login as admin
+POST http://localhost:8080/uaa/login
+Content-Type: application/x-www-form-urlencoded
+
+username=admin&password=admin
+
+###
+
+POST http://localhost:8080/service-a/foos
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Hello"
+}
+
+###
+
+GET http://localhost:8080/service-a/foos/1
+
+###

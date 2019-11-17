@@ -1,0 +1,18 @@
+# Hello
+GET http://localhost:8082/service-a/hello
+
+###
+
+POST http://localhost:8082/service-a/foos
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Hello"
+}
+
+###
+
+GET http://localhost:8082/service-a/foos/1
+
+###

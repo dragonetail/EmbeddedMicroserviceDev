@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: service-b
+
+server:
+  port: 8870
+  servlet:
+    context-path: /service-b
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        keyValue: "abc"
+      id: fooScope
+      serviceId: ${PREFIX:}resource
