@@ -7,3 +7,55 @@ server:
 
 logging:
   level.org.springframework.security: DEBUG
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/uaa?serverTimezone=GMT%2B8&useLegacyDatetimeCode=false&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&allowPublicKeyRetrieval=true
+      username: uaa
+      password: uaa
+      driverClassName: com.mysql.jdbc.Driver
+      initialSize: 30
+      minIdle: 30
+      maxActive: 30
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 90000
+      minEvictableIdleTimeMillis: 1800000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      format_sql: true
+    show-sql: true
+
+
+  #Auth configs
+app:
+  auth:
+    resourceId: uaa
+    defaultAccessTokenTimeout: 1800
+    defaultRefreshTokenTimeout: 86400
+    kfName: demo.jks
+    ksPass: Za6{ApH5S}W4Pud
+    maxFailedLoginAttemptsForAccountLock: 5
+    failedLoginAttemptAccountLockTimeout: 900
+#  endpoint:
+#    api: /api
+#    index: ${app.endpoint.api}/index
+#    testEndpoint: ${app.endpoint.api}/testAuth

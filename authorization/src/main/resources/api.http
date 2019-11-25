@@ -1,0 +1,23 @@
+# Index
+GET http://localhost:8081/uaa/api/index
+
+###
+# testAuth
+POST http://localhost:8081/uaa/oauth/token
+Authorization: Basic client-a secret
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&client_id=client-a&username=admin&password=password
+
+> {%
+client.global.set("access_token", response.body.access_token);
+client.log(response.body.access_token);
+%}
+
+
+###
+# testAuth
+GET http://localhost:8081/uaa/api/testAuth
+Authorization: Bearer {{access_token}}
+
+###
