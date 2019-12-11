@@ -16,6 +16,27 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-security</artifactId>
+        </dependency>
+<!--        compile 'org.springframework.cloud:spring-cloud-starter-feign:1.2.1.RELEASE'-->
+<!--        compile 'org.springframework.cloud:spring-cloud-starter-sleuth:1.0.10.RELEASE'-->
+
+<!--        compile 'org.springframework.cloud:spring-cloud-starter-security:1.1.3.RELEASE'-->
+<!--        compile 'org.springframework.security.oauth:spring-security-oauth2'-->
+<!--        -->
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
@@ -59,6 +80,11 @@
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-security</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

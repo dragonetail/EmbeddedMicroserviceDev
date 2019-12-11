@@ -5,9 +5,6 @@ server:
     context-path: /uaa
   use-forward-headers: false
 
-logging:
-  level.org.springframework.security: DEBUG
-
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -49,13 +46,14 @@ spring:
 app:
   auth:
     resourceId: uaa
+    keystoreFile: demo.jks
+    keyAlias: demo
+    keystorePassword: Za6{ApH5S}W4Pud
     defaultAccessTokenTimeout: 1800
     defaultRefreshTokenTimeout: 86400
-    kfName: demo.jks
-    ksPass: Za6{ApH5S}W4Pud
     maxFailedLoginAttemptsForAccountLock: 5
     failedLoginAttemptAccountLockTimeout: 900
-#  endpoint:
-#    api: /api
-#    index: ${app.endpoint.api}/index
-#    testEndpoint: ${app.endpoint.api}/testAuth
+
+logging:
+  level:
+    org.springframework.security: DEBUG

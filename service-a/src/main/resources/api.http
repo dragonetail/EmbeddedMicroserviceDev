@@ -2,17 +2,46 @@
 GET http://localhost:8082/service-a/hello
 
 ###
+GET http://localhost:8082/service-a/byIdWithServiceAdmin/1
+Authorization: Bearer {{access_token}}
 
-POST http://localhost:8082/service-a/foos
-Content-Type: application/json
+###
+GET http://localhost:8082/service-a/byIdWithAdmin/1
+Authorization: Bearer {{access_token}}
 
-{
-  "id": 1,
-  "name": "Hello"
-}
+###
+GET http://localhost:8082/service-a/byIdWithAdminAndScope/1
+Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:8082/service-a/users/extra
+Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:8082/service-a/users/principal
+Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:8082/service-a/b/hello
+Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:8082/service-a/b/secret
+Authorization: Bearer {{access_token}}
 
 ###
 
-GET http://localhost:8082/service-a/foos/1
+###
+# 使用Web Password模式进行认证
+POST http://localhost:8081/uaa/oauth/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=web&grant_type=password&username=admin&password=password
+
+> {%
+client.global.set("access_token", response.body.access_token);
+client.log(response.body.access_token);
+%}
 
 ###
+

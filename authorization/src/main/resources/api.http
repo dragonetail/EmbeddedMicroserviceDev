@@ -2,9 +2,47 @@
 GET http://localhost:8081/uaa/api/index
 
 ###
-# testAuth
+# 使用Client模式进行认证
 POST http://localhost:8081/uaa/oauth/token
-Authorization: Basic client-a secret
+Authorization: Basic client-a client-password
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials&client_id=client-a&scope=read
+
+> {%
+client.global.set("access_token", response.body.access_token);
+client.log(response.body.access_token);
+%}
+
+###
+# 使用Web Password模式进行认证
+POST http://localhost:8081/uaa/oauth/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=web&grant_type=password&username=admin&password=password
+
+> {%
+client.global.set("access_token", response.body.access_token);
+client.log(response.body.access_token);
+%}
+
+###
+# 使用Mobile Password模式进行认证
+POST http://localhost:8081/uaa/oauth/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=mobile&grant_type=password&username=admin&password=password
+
+> {%
+client.global.set("access_token", response.body.access_token);
+client.log(response.body.access_token);
+%}
+
+
+###
+# 使用Password模式进行认证
+POST http://localhost:8081/uaa/oauth/token
+Authorization: Basic client-a client-password
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=password&client_id=client-a&username=admin&password=password
@@ -16,8 +54,13 @@ client.log(response.body.access_token);
 
 
 ###
-# testAuth
+# 访问需要授权的地址
 GET http://localhost:8081/uaa/api/testAuth
+Authorization: Bearer {{access_token}}
+
+###
+# 访问授权用户信息
+GET http://localhost:8081/uaa/api/me
 Authorization: Bearer {{access_token}}
 
 ###

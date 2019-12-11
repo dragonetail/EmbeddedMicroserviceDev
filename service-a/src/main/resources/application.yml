@@ -4,6 +4,14 @@ server:
   servlet:
     context-path: /service-a
 
+spring:
+  main:
+    allow-bean-definition-overriding: true  #允许一样的beanName
+
 logging:
   level:
     org: INFO
+
+
+service:
+  B: service-b

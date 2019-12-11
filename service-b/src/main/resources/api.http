@@ -1,0 +1,9 @@
+# Hello
+GET http://localhost:8083/service-b/hello
+Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:8083/service-b/secret
+Authorization: Bearer {{access_token}}
+
+###

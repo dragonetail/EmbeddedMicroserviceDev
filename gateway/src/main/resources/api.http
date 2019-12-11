@@ -3,37 +3,63 @@ GET http://localhost:8080/service-a/hello
 
 ###
 
-# Login
-GET http://localhost:8080/uaa/login
+
 
 ###
-
-# Login as user
-POST http://localhost:8080/uaa/login
+# 使用Web Password模式进行认证
+POST http://localhost:8080/uaa/oauth/token
+Authorization: Basic web web-password
 Content-Type: application/x-www-form-urlencoded
 
-username=user&password=password
+grant_type=password&client_id=web&username=admin&password=password
+
+> {%
+client.global.set("access_token", response.body.access_token);
+client.log(response.body.access_token);
+%}
+
+###
+# 访问需要授权的地址
+GET http://localhost:8080/uaa/api/testAuth
+Authorization: Bearer {{access_token}}
+
+###
+# 访问授权用户信息
+GET http://localhost:8080/uaa/api/me
+Authorization: Bearer {{access_token}}
 
 ###
 
-# Login as admin
-POST http://localhost:8080/uaa/login
-Content-Type: application/x-www-form-urlencoded
+# Hello
+GET http://localhost:8080/service-a/hello
 
-username=admin&password=admin
+###
+GET http://localhost:8080/service-a/byIdWithServiceAdmin/1
+Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:8080/service-a/byIdWithAdmin/1
+Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:8080/service-a/byIdWithAdminAndScope/1
+Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:8080/service-a/users/extra
+Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:8080/service-a/users/principal
+Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:8080/service-a/b/hello
+Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:8080/service-a/b/secret
+Authorization: Bearer {{access_token}}
 
 ###
 
-POST http://localhost:8080/service-a/foos
-Content-Type: application/json
-
-{
-  "id": 1,
-  "name": "Hello"
-}
-
-###
-
-GET http://localhost:8080/service-a/foos/1
-
-###
