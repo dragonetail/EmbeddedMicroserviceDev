@@ -44,6 +44,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/api/me", "/api/user").authenticated()
                 .antMatchers("/api/testAuth").hasAuthority("test")
                 .antMatchers("/api/index").permitAll()
+                .antMatchers("/w/**").access("#oauth2.hasScope('web')")
+                .antMatchers("/m/**").access("#oauth2.hasScope('mobile')")
                 .antMatchers("/**").denyAll();
     }
 }

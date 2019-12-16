@@ -39,6 +39,7 @@ client.log(response.body.access_token);
 %}
 
 
+
 ###
 # 使用Password模式进行认证
 POST http://localhost:8081/uaa/oauth/token
